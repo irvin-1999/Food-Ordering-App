@@ -6,9 +6,13 @@ import { useContext } from 'react';
 const HeaderCartButton=props=>{
     const cartCtx=useContext(CartContext);
 
-    const numberOfCartItems = cartCtx.items
-        ? cartCtx.items.reduce((acc, item) => acc + item.amount, 0)
-        : 0;
+    const { items } = cartCtx;
+    const cartItems = items || [];
+  
+    // Use reduce on the cartItems array
+    const numberOfCartItems = cartItems.reduce((curNumber, item) => {
+      return curNumber + item.amount;
+    }, 0);
 
     return <button className={classes.button} onClick={props.onClickk}>
         <span className={classes.icon}>
